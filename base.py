@@ -5,6 +5,7 @@ DATA_DIRECTORY = 'data/'
 ALL_EXPERIENCES_COUNT = 100
 HAPLOTYPE_LENGTH = 100
 START_TIME = 0
+NUCLEOTIDES = ['a', 't', 'g', 'c']
 
 
 def get_experience_number():

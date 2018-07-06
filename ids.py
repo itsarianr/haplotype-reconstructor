@@ -22,9 +22,9 @@ def combine(reference_sequence, fragment):
 def search(experience_number):
     global FRAGMENTS_COUNT
     fragments = base.read_data_from_file(experience_number, 'fragment')
+    FRAGMENTS_COUNT += len(fragments)
     first_reference_sequence = generate_base_reference_sequence()
     second_reference_sequence = generate_base_reference_sequence()
-    FRAGMENTS_COUNT += len(fragments)
     for fragment in fragments:
         if are_compatible(first_reference_sequence, fragment):
             first_reference_sequence = combine(
