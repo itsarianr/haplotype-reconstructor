@@ -1,9 +1,10 @@
 import base
 import random
+import math
 
 FRAGMENTS_COUNT = 0
-MAX_WORSE_NEIGHBOUR_CHECK_COUNT = 10
-MAX_HILL_CLIMBS_COUNT = 100
+MAX_HILL_CLIMBS_COUNT = 10
+MAX_TEMPERATURE = 100
 
 
 def generate_random_reference_sequence():
@@ -53,12 +54,18 @@ def increase_fragments_count(fragments):
 
 
 def climb_hill(fragments):
-    worse_neighbour_check_count = 0
+    temperature = MAX_TEMPERATURE
     first_reference_sequence = generate_random_reference_sequence()
     second_reference_sequence = generate_random_reference_sequence()
     total_score = calculate_total_reference_sequences_fitness_score(
         first_reference_sequence, second_reference_sequence, fragments)
     while True:
+        if temperature == 0:
+            return {
+                'first': first_reference_sequence,
+                'second': second_reference_sequence,
+                'score': total_score
+            }
         first_random_neighbour = get_random_neighbour(
             first_reference_sequence)
         second_random_neighbour = get_random_neighbour(
@@ -69,13 +76,12 @@ def climb_hill(fragments):
             first_reference_sequence = first_random_neighbour
             second_reference_sequence = second_random_neighbour
         else:
-            if worse_neighbour_check_count >= MAX_WORSE_NEIGHBOUR_CHECK_COUNT:
-                return {
-                    'first': first_reference_sequence,
-                    'second': second_reference_sequence,
-                    'score': total_score
-                }
-            worse_neighbour_check_count += 1
+            x = (total_score - neighbour_total_score) / temperature
+            probability = math.exp(x)
+            if random.random() <= probability:
+                first_reference_sequence = first_random_neighbour
+                second_reference_sequence = second_random_neighbour
+        temperature -= 1
 
 
 def search(experience_number):
