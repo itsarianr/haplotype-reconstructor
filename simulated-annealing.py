@@ -7,13 +7,6 @@ MAX_HILL_CLIMBS_COUNT = 10
 MAX_TEMPERATURE = 100
 
 
-def generate_random_reference_sequence():
-    reference_sequence = []
-    for i in range(base.HAPLOTYPE_LENGTH):
-        reference_sequence.append(random.choice(base.NUCLEOTIDES))
-    return ''.join(reference_sequence)
-
-
 def calculate_reference_sequences_hamming_distance(first_reference_sequence,
                                                    second_reference_sequence,
                                                    fragment):
@@ -55,8 +48,8 @@ def increase_fragments_count(fragments):
 
 def climb_hill(fragments):
     temperature = MAX_TEMPERATURE
-    first_reference_sequence = generate_random_reference_sequence()
-    second_reference_sequence = generate_random_reference_sequence()
+    first_reference_sequence = base.generate_random_reference_sequence()
+    second_reference_sequence = base.generate_random_reference_sequence()
     total_score = calculate_total_reference_sequences_fitness_score(
         first_reference_sequence, second_reference_sequence, fragments)
     while True:
