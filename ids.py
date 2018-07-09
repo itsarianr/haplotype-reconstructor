@@ -33,7 +33,7 @@ def search(experience_number):
             second_reference_sequence = combine(
                 second_reference_sequence, fragment)
         else:
-            print('WTF?!')
+            print('Conflict.')
     haplotypes = base.read_data_from_file(experience_number, 'haplotype')
     if (are_compatible(haplotypes[0], first_reference_sequence)
             and are_compatible(haplotypes[1], second_reference_sequence)):

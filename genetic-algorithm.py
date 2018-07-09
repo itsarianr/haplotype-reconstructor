@@ -1,7 +1,7 @@
 import base
 import random
 
-POPULATION_SIZE = 100
+POPULATION_SIZE = 50
 FRAGMENTS_COUNT = 0
 MUTATION_PROBABILITY = 0.01
 
@@ -87,10 +87,10 @@ def search(experience_number):
             best_sequence_pair['second'] = best[1]
             best_sequence_pair['score'] = score
     haplotypes = base.read_data_from_file(experience_number, 'haplotype')
-    print('Accuracy 1: ' + str((100 - base.calculate_hamming_distance(
-        best_sequence_pair['first'], haplotypes[0])) / 100))
-    print('Accuracy 2: ' + str((100 - base.calculate_hamming_distance(
-        best_sequence_pair['second'], haplotypes[1])) / 100))
+    print('Accuracy 1: ' + str((base.HAPLOTYPE_LENGTH - base.calculate_hamming_distance(
+        best_sequence_pair['first'], haplotypes[0])) / base.HAPLOTYPE_LENGTH))
+    print('Accuracy 2: ' + str((base.HAPLOTYPE_LENGTH - base.calculate_hamming_distance(
+        best_sequence_pair['second'], haplotypes[1])) / base.HAPLOTYPE_LENGTH))
 
 
 def start():
@@ -104,4 +104,3 @@ def start():
 
 
 start()
-# print('child: ', reproduce(('aaaaa', 'bbbbb'), ('ccccc', 'ddddd')))

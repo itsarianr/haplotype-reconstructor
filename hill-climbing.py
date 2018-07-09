@@ -2,7 +2,7 @@ import base
 import random
 
 FRAGMENTS_COUNT = 0
-MAX_WORSE_NEIGHBOUR_CHECK_COUNT = 2
+MAX_WORSE_NEIGHBOUR_CHECK_COUNT = 10
 MAX_HILL_CLIMBS_COUNT = 10
 
 
@@ -50,10 +50,10 @@ def search(experience_number):
         if local_best_reference_seqs['score'] > best_reference_seq['score']:
             best_reference_seq = local_best_reference_seqs
     haplotypes = base.read_data_from_file(experience_number, 'haplotype')
-    print('Accuracy 1: ' + str((100 - base.calculate_hamming_distance(
-        best_reference_seq['first'], haplotypes[0])) / 100))
-    print('Accuracy 2: ' + str((100 - base.calculate_hamming_distance(
-        best_reference_seq['second'], haplotypes[1])) / 100))
+    print('Accuracy 1: ' + str((base.HAPLOTYPE_LENGTH - base.calculate_hamming_distance(
+        best_reference_seq['first'], haplotypes[0])) / base.HAPLOTYPE_LENGTH))
+    print('Accuracy 2: ' + str((base.HAPLOTYPE_LENGTH - base.calculate_hamming_distance(
+        best_reference_seq['second'], haplotypes[1])) / base.HAPLOTYPE_LENGTH))
 
 
 def start():

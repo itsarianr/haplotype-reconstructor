@@ -3,7 +3,7 @@ import random
 import math
 
 FRAGMENTS_COUNT = 0
-MAX_HILL_CLIMBS_COUNT = 10
+MAX_HILL_CLIMBS_COUNT = 1
 MAX_TEMPERATURE = 100
 
 
@@ -53,6 +53,7 @@ def climb_hill(fragments):
     total_score = calculate_total_reference_sequences_fitness_score(
         first_reference_sequence, second_reference_sequence, fragments)
     while True:
+        print(temperature)
         if temperature == 0:
             return {
                 'first': first_reference_sequence,
@@ -66,9 +67,11 @@ def climb_hill(fragments):
         neighbour_total_score = calculate_total_reference_sequences_fitness_score(
             first_random_neighbour, second_random_neighbour, fragments)
         if neighbour_total_score > total_score:
+            print('better...')
             first_reference_sequence = first_random_neighbour
             second_reference_sequence = second_random_neighbour
         else:
+            print('worse...')
             x = (total_score - neighbour_total_score) / temperature
             probability = math.exp(x)
             if random.random() <= probability:
@@ -90,10 +93,10 @@ def search(experience_number):
         if local_best_reference_seqs['score'] > best_reference_seq['score']:
             best_reference_seq = local_best_reference_seqs
     haplotypes = base.read_data_from_file(experience_number, 'haplotype')
-    print('Accuracy 1: ' + str((100 - base.calculate_hamming_distance(
-        best_reference_seq['first'], haplotypes[0])) / 100))
-    print('Accuracy 2: ' + str((100 - base.calculate_hamming_distance(
-        best_reference_seq['second'], haplotypes[1])) / 100))
+    print('Accuracy 1: ' + str((base.HAPLOTYPE_LENGTH - base.calculate_hamming_distance(
+        best_reference_seq['first'], haplotypes[0])) / base.HAPLOTYPE_LENGTH))
+    print('Accuracy 2: ' + str((base.HAPLOTYPE_LENGTH - base.calculate_hamming_distance(
+        best_reference_seq['second'], haplotypes[1])) / base.HAPLOTYPE_LENGTH))
 
 
 def start():
