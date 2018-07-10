@@ -4,7 +4,7 @@ import random
 import math
 
 DATA_DIRECTORY = 'data/'
-ALL_EXPERIENCES_COUNT = 102
+ALL_EXPERIENCES_COUNT = 103
 HAPLOTYPE_LENGTH = 100
 START_TIME = 0
 NUCLEOTIDES = ['a', 't', 'g', 'c']

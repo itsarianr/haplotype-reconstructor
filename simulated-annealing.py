@@ -3,7 +3,7 @@ import random
 import math
 
 FRAGMENTS_COUNT = 0
-MAX_HILL_CLIMBS_COUNT = 1
+MAX_HILL_CLIMBS_COUNT = 10
 MAX_TEMPERATURE = 100
 
 
@@ -89,6 +89,7 @@ def search(experience_number):
         'score': 0
     }
     for i in range(MAX_HILL_CLIMBS_COUNT):
+        print('hill climb number ' + str(i) + '...')
         local_best_reference_seqs = climb_hill(fragments)
         if local_best_reference_seqs['score'] > best_reference_seq['score']:
             best_reference_seq = local_best_reference_seqs

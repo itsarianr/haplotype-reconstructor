@@ -80,6 +80,7 @@ def search(experience_number):
     }
     population = generate_random_population()
     for i in range(10):
+        print('Generation number ' + str(i) + '...')
         population = reproduce_new_population(population, fragments)
         best, score = get_fittest_in_population(population, fragments)
         if score > best_sequence_pair['score']:

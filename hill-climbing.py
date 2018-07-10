@@ -25,9 +25,11 @@ def climb_hill(fragments):
         neighbour_total_score = base.calculate_total_reference_sequences_fitness_score(
             first_random_neighbour, second_random_neighbour, fragments)
         if neighbour_total_score > total_score:
+            print('better...')
             first_reference_sequence = first_random_neighbour
             second_reference_sequence = second_random_neighbour
         else:
+            print('worse...')
             if worse_neighbour_check_count >= MAX_WORSE_NEIGHBOUR_CHECK_COUNT:
                 return {
                     'first': first_reference_sequence,
@@ -46,6 +48,7 @@ def search(experience_number):
         'score': 0
     }
     for i in range(MAX_HILL_CLIMBS_COUNT):
+        print('hill climb number ' + str(i) + '...')
         local_best_reference_seqs = climb_hill(fragments)
         if local_best_reference_seqs['score'] > best_reference_seq['score']:
             best_reference_seq = local_best_reference_seqs
